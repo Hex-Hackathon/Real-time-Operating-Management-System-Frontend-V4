@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import DateInput from '../../components/admin/DateInput';
 import useDateInput from '../../hooks/useDateInput';
 import StockRequestTable from '../../components/admin/StockRequestTable';
@@ -13,12 +13,11 @@ import { db } from '../../realtime/firebase_init';
 import { ref, onValue } from 'firebase/database';
 
 const columnNames = [
-  
   'Product Name',
   'Quantity',
   'Status',
   'Admin Status',
-  'Created Date',
+  'Expected Date',
 ];
 
 const StockRequest = () => {
@@ -49,18 +48,17 @@ const StockRequest = () => {
     }
   };
 
-   const [isEvent, setIsEvent] = useState();
-   useEffect(() => {
-     const newMaterialRequestEventRef = ref(db, '/NewRawRequestEvent/');
-     onValue(newMaterialRequestEventRef, (snapshot) => {
-       const data = snapshot.val();
-       if (data) setIsEvent(data);
-       if (isEvent) alert('There is an Stock request from Sales');
-     });
+  const [isEvent, setIsEvent] = useState();
+  useEffect(() => {
+    const newMaterialRequestEventRef = ref(db, '/NewRawRequestEvent/');
+    onValue(newMaterialRequestEventRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) setIsEvent(data);
+      if (isEvent) alert('There is an Stock request from Sales');
+    });
 
-     setIsEvent('');
-   }, [isEvent]);
-  
+    setIsEvent('');
+  }, [isEvent]);
 
   return (
     <div>

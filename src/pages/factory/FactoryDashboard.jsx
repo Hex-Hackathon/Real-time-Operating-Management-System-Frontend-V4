@@ -12,54 +12,10 @@ import { db } from '../../realtime/firebase_init';
 //firebase
 import { ref, onValue } from 'firebase/database';
 const FactoryDashboard = () => {
-  // const productData = [
-  //   {
-  //     _id: 1,
-  //     price: '$269',
-  //     quantity: 22,
-  //     status: 'processing',
-  //     product: {
-  //       product_name: 'Mango Tango Delight'
-  //     },
-  //     admin_status: 'processing'
-  //   },
-  //   {
-  //     _id: 2,
-  //     price: '$269',
-  //     quantity: 20,
-  //     status: 'processed',
-  //     product: {
-  //       product_name: 'Burmese Bliss'
-  //     },
-  //     admin_status: 'approved',
-  //   },
-  //     {
-  //     _id: 3,
-  //     price: '$269',
-  //     quantity: 220,
-  //     status: 'processing',
-  //     product: {
-  //       product_name: 'Emerald Green Chai'
-  //     },
-  //     admin_status: 'approved',
-  //   },
-  //     {
-  //     _id:4,
-  //     price: '$269',
-  //     quantity: 22,
-  //     status: 'processed',
-  //     product: {
-  //       product_name: 'Golden Sunshine Tea'
-  //     },
-  //     admin_status: 'approved',
-  //   },
-  // ];
-
   const [date, setDate] = useState(new Date().toISOString());
 
   const dispatch = useDispatch();
   const { requestedProducts } = useSelector((state) => state.requestedProducts);
-  console.log(requestedProducts);
   const [isEvent, setIsEvent] = useState();
   useEffect(() => {
     const newRawRequestEventRef = ref(db, '/NewRawRequestEvent/');
@@ -114,7 +70,7 @@ const FactoryDashboard = () => {
             <div className="col-start-1 col-end-4 flex items-center">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <p className="text-sm text-black dark:text-white">
-                  {product?.product?.product_name}
+                  {product?.product?.product_name || 'Citrus Fusion Fizz'}
                 </p>
               </div>
             </div>

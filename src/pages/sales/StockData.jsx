@@ -22,15 +22,15 @@ const StockData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-          const ApproveStockRequestEventRef = ref(
-            db,
-            '/ApproveStockRequestEvent/',
-          );
-          onValue(ApproveStockRequestEventRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) setIsEvent(data);
-            if (isEvent) alert('Admin approves stock request');
-          });
+        const ApproveStockRequestEventRef = ref(
+          db,
+          '/ApproveStockRequestEvent/',
+        );
+        onValue(ApproveStockRequestEventRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) setIsEvent(data);
+          if (isEvent) alert('Admin approves stock request');
+        });
 
         dispatch(handleGetInstocksList());
         setNewDataArray(instocksList);
@@ -41,7 +41,7 @@ const StockData = () => {
       }
     };
     fetchData();
-  }, [dispatch,isEvent]);
+  }, [dispatch, isEvent]);
 
   console.log(instocksList);
 
@@ -68,7 +68,7 @@ const StockData = () => {
         <Dialog.Root>
           <Dialog.Trigger asChild>
             <button className="mb-8 mt-5 py-2 px-5 bg-yellow-500 rounded shadow font-mons font-bold text-black">
-             Request Stock
+              Request Stock
             </button>
           </Dialog.Trigger>
           <Dialog.Portal className="pointer-events-none">
@@ -78,11 +78,10 @@ const StockData = () => {
             />
             <Dialog.Content className="DialogContentForPre">
               <Dialog.Title className="DialogTitle text-white">
-                Create New Order
+                Request stock data
               </Dialog.Title>
               <Dialog.Description className="DialogDescription">
-                Add the customer to create the order, and add the products from
-                the table list.
+                Notify Admin for Low Stock Action{' '}
               </Dialog.Description>
 
               <div>
@@ -126,7 +125,7 @@ const StockData = () => {
                   onClick={requestStock}
                   className=" mt-5 py-2 px-5 bg-yellow-500 rounded shadow font-mons font-bold text-black"
                 >
-                  {loading ? "Sending" : "Send Request"}
+                  {loading ? 'Sending' : 'Send Request'}
                 </button>
               </div>
               <Dialog.Close asChild></Dialog.Close>
@@ -146,13 +145,13 @@ const StockData = () => {
             <p className="font-medium  text-black dark:text-white">Products</p>
           </div>
 
-          <div className="col-span-2 hidden items-center sm:flex">
+          <div className="col-span-3 hidden items-center sm:flex">
             <p className="font-medium  text-black dark:text-white">
               Product ID
             </p>
           </div>
 
-          <div className="col-span-3 flex items-center">
+          <div className="col-span-2 flex items-center">
             <p className="font-medium text-black dark:text-white">Quantity</p>
           </div>
         </div>
@@ -170,13 +169,13 @@ const StockData = () => {
                       {data.product_name}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center col-span-2 ">
-                    <p className="text-sm text-black dark:text-white">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center col-span-3">
+                    <p className="text-sm text-black dark:text-white font-mono">
                       {data._id}
                     </p>
                   </div>
 
-                  <div className="col-span-3 gap-4 flex items-center">
+                  <div className="col-span-2 gap-4 flex items-center">
                     <p className="text-sm text-black dark:text-white">
                       {data.in_stock_count}
                     </p>

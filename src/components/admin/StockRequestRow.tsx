@@ -30,7 +30,7 @@ const StockRequestRow = ({ item }: Props) => {
 
   return (
     <div className="grid grid-cols-4 border-b border-stroke relative dark:border-strokedark sm:grid-cols-5">
-      <div className="absolute left-0  top-6">
+      <div className="absolute -left-3 top-6">
         <label
           id={`checkboxLabel_${item._id}`}
           className="flex cursor-pointer select-none items-center"
@@ -56,8 +56,8 @@ const StockRequestRow = ({ item }: Props) => {
       </div>
 
       <div className="flex items-center justify-center p-2.5 xl:p-5">
-        <p className="hidden text-black dark:text-white sm:block ">
-          {item.product?.product_name}
+        <p className="hidden text-black dark:text-white sm:block truncate text-left">
+          {item.product?.product_name || 'Citrus Fusion Fizz'}
         </p>
       </div>
 

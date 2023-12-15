@@ -6,26 +6,22 @@ import { useEffect, useState } from 'react';
 import { handleGetCustomersList } from '../../store/slices/Sale/customersListSlice';
 
 const Customers = () => {
+  const dispatch = useDispatch();
 
-      const dispatch = useDispatch();
+  const { customersList, loading, error } = useSelector(
+    (state) => state.customersList,
+  );
 
-      const { customersList, loading, error } = useSelector(
-        (state) => state.customersList,
-      );
-
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            dispatch(handleGetCustomersList());
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-        fetchData();
-      }, [dispatch]); 
-
-
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(handleGetCustomersList());
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
 
   return (
     <div>
@@ -44,16 +40,15 @@ const Customers = () => {
           <div className="col-span-3 hidden items-center sm:flex">
             <p className="font-medium ">Customer's Name</p>
           </div>
-          <div className="col-span-3 flex items-center">
+          <div className="col-span-2 flex items-center">
             <p className="font-medium ">Customer's Address</p>
           </div>
-          <div className="col-span-1 flex items-center">
+          <div className="col-span-2 flex items-center">
             <p className="font-medium ">Phone</p>
           </div>
           <div className="col-span-1 flex items-center">
             <p className="font-medium">Customer's Type</p>
           </div>
-      
         </div>
 
         <div>
@@ -65,10 +60,13 @@ const Customers = () => {
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center col-span-3">
                   <p className="text-sm text-black dark:text-white">
-                    {customer.name} | {customer._id}
+                    {customer.name} |{' '}
+                    <span className="font-mono text-[#e0e0e0]">
+                      {customer._id}
+                    </span>
                   </p>
                 </div>
-                <div className="col-span-3 flex items-center">
+                <div className="col-span-2 flex items-center">
                   <div className="col-span-3 hidden items-center sm:flex">
                     <p className="text-sm text-black dark:text-white">
                       {customer.deli_address}
@@ -76,7 +74,7 @@ const Customers = () => {
                   </div>
                 </div>
 
-                <div className="col-span-1 flex items-center">
+                <div className="col-span-2 flex items-center">
                   <p className="text-sm text-black dark:text-white">
                     {customer.phone}
                   </p>
@@ -100,7 +98,6 @@ const Customers = () => {
                     )}
                   </p>
                 </div>
-              
               </div>
             ))}
         </div>

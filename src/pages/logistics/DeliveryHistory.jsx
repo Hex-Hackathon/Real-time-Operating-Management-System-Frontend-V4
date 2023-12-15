@@ -92,29 +92,27 @@ const DeliveryHistory = () => {
     //   setIsEvent(data);
     // });
 
-     const newOrderRef = ref(db, '/NewOrderEvent/');
-     onValue(newOrderRef, (snapshot) => {
-       const data = snapshot.val();
-       if (data) setIsEvent(data);
-     });
+    const newOrderRef = ref(db, '/NewOrderEvent/');
+    onValue(newOrderRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) setIsEvent(data);
+    });
 
     const fetchData = async () => {
       try {
         dispatch(handleGetProcessingOrdersList());
-        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-       
+
       //  const getNewOrderData = (snapshot) => {
       //    const fetchedData = snapshot.val();
       //    setIsEvent(fetchedData);
       //  };
       //  const unsubscribeNewOrder = onValue(newOrderRef, getNewOrderData);
-    
     };
     fetchData();
-  }, [dispatch,isEvent]);
+  }, [dispatch, isEvent]);
 
   const { processingOrdersList } = useSelector(
     (state) => state.processingOrdersList,
@@ -155,7 +153,7 @@ const DeliveryHistory = () => {
               className="DialogOverlay"
               onClick={(e) => e.stopPropagation()}
             />
-            <Dialog.Content className="DialogContent">
+            <Dialog.Content className="DialogContent w-[600px]">
               <Dialog.Title className="DialogTitle text-yellow-500 font-bold">
                 New Deli Route
               </Dialog.Title>
@@ -320,7 +318,6 @@ const DeliveryHistory = () => {
               </div>
               <div className="col-span-1 flex items-center">
                 <p className="text-sm text-black dark:text-white">
-                
                   {new Date(product.expected_date).toLocaleDateString('en-Us', {
                     dateStyle: 'medium',
                   })}

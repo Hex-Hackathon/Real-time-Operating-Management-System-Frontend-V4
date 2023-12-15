@@ -7,17 +7,17 @@ import {
 } from './api/materialRequestApiSlice';
 import { useMaterialRequestStore } from './store/material_request_store';
 import toast from 'react-hot-toast';
-import {db} from '../../realtime/firebase_init';
+import { db } from '../../realtime/firebase_init';
 //firebase
 import { ref, onValue } from 'firebase/database';
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 const columnNames = [
   'Material Name',
   'Quantity',
   'Status',
   'Budget',
-  'Created Date',
+  'Expected Date',
 ];
 
 const MaterialRequests = () => {
@@ -46,17 +46,17 @@ const MaterialRequests = () => {
     }
   };
 
- const [isEvent, setIsEvent] = useState("");
-   useEffect(() => {
-     const newMaterialRequestEventRef = ref(db, '/NewMaterialRequestEvent/');
-     onValue(newMaterialRequestEventRef, (snapshot) => {
-       const data = snapshot.val();
-       if (data) setIsEvent(data);
-       if (isEvent) alert('There is an budget request from Factory');
-     });
+  const [isEvent, setIsEvent] = useState('');
+  useEffect(() => {
+    const newMaterialRequestEventRef = ref(db, '/NewMaterialRequestEvent/');
+    onValue(newMaterialRequestEventRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) setIsEvent(data);
+      if (isEvent) alert('There is an budget request from Factory');
+    });
 
-     setIsEvent('');
-   }, [isEvent]);
+    setIsEvent('');
+  }, [isEvent]);
 
   return (
     <div>

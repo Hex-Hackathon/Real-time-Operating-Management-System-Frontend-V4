@@ -16,12 +16,14 @@ const LogisticsDashboard = () => {
     fetchData();
   }, [dispatch]);
 
+
   const { deliRoutes, loading, error } = useSelector(
     (state) => state.deliRoutes,
   );
 
   const [newDataArray, setNewDataArray] = useState([]);
   console.log(deliRoutes);
+  console.log(newDataArray)
 
   return (
     <div>

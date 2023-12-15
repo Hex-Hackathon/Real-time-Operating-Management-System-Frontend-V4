@@ -18,7 +18,7 @@ const columnNames = [
   'Order Status',
   'Delivery Status',
   'Paid',
-  'Created At',
+  'Expected Date',
 ];
 
 const PreOrders = () => {

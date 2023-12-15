@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../../assets/logo/favicon.svg';
 import DarkModeSwitcher from '../../../components/DarkModeSwitcher';
 import DropdownNotification from '../../../components/DropdownNotification';
@@ -7,11 +7,31 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const location = useLocation();
+  const { pathname } = location;
+
+  const departmentName = () => {
+    if (pathname.startsWith('/sales')) {
+      return <> Sales Department</>;
+    } else if (pathname.startsWith('/warehouse')) {
+      return <> Warehouse Department</>;
+    } else if (pathname.startsWith('/logistics')) {
+      return <> Logistics Department</>;
+    } else if (pathname.startsWith('/factory')) {
+      return <> Factory Department</>;
+    } else if (pathname.startsWith('/admin')) {
+      return <> Admin Department</>;
+    }
+  };
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
-      <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11 lg:justify-end">
+      <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11 lg:justify-between">
+        <div className="text-white font-bold text-lg  font-mons hidden lg:flex">
+          {departmentName()}
+        </div>
+
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
-          {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-controls="sidebar"
             onClick={(e) => {
